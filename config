@@ -1,0 +1,7 @@
+
+# Define paths to kernel, initrd, and squashed filesystem
+
+export KERNEL=
+export INITRD=
+export SQUASH_FS=
+
