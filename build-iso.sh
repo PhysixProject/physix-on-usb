@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./config
+source ./build-iso.conf
 
 if [ ! -r ./syslinux-6.04-pre1.tar.gz ] ; then
 	wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.gz
