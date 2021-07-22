@@ -2,21 +2,23 @@
 
 source ./build-iso.conf
 
+SYSLINUX='./syslinux-6.04-pre1/bios'
+
 if [ ! -r ./syslinux-6.04-pre1.tar.gz ] ; then
 	wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.gz
 	tar xf syslinux-6.04-pre1.tar.gz
 fi
 
-cp -v ./syslinux-6.04-pre1/bios/core/isolinux.bin                  ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/hdt/hdt.c32                  ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/elflink/ldlinux/ldlinux.c32  ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/lib/libcom32.c32             ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/gpllib/libgpl.c32            ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/cmenu/libmenu/libmenu.c32    ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/cmenu/libmenu/libmenu.c32    ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/libutil/libutil.c32          ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/com32/menu/vesamenu.c32            ./physix-project-usb/isolinux/ &&
-cp -v ./syslinux-6.04-pre1/bios/memdisk/memdisk                    ./physix-project-usb/isolinux/ 
+cp -v $SYSLINUX/core/isolinux.bin                  ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/hdt/hdt.c32                  ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/elflink/ldlinux/ldlinux.c32  ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/lib/libcom32.c32             ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/gpllib/libgpl.c32            ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/cmenu/libmenu/libmenu.c32    ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/cmenu/libmenu/libmenu.c32    ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/libutil/libutil.c32          ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/com32/menu/vesamenu.c32            ./physix-project-usb/isolinux/ &&
+cp -v $SYSLINUX/memdisk/memdisk                    ./physix-project-usb/isolinux/ 
 if [ $? -ne 0 ] ; then
 	echo "Error: cp syslinux files"
 	exit 1
@@ -53,7 +55,7 @@ genisoimage -o "Physix-Project-Beta.iso" \
             -b isolinux/isolinux.bin  \
             -c isolinux/isolinux.boot physix-project-usb
 
-./syslinux-6.04-pre1/bios/utils/isohybrid.pl  Physix-Project-Beta.iso
+$SYSLINUX/utils/isohybrid.pl  Physix-Project-Beta.iso
 
 
 
