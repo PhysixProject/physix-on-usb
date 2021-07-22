@@ -30,15 +30,13 @@ cd ..
 wget wget https://physixproject.org/source/base/linux-5.4.41.tar.xz
 tar xf linux-5.4.41.tar.xz
 cd linux-5.4.41
-cp /opt/admin/physix/build-scripts/03-base-config/configs/linux_config-5.4.41 .
+cp /path/to/physix-on-usb/config-linux-5.4.41 .
 cat ../aufs5-base.patch | patch -Np1
 cat ../aufs5-kbuild.patch | patch -Np1
 cat ../aufs5-mmap.patch | patch -Np1
 cat ../aufs5-standalone.patch | patch -Np1
 tar xvf ../aufs5.tar.gz
 ```
-
-Copy config-linux-5.4.41 into your linux tree and rename it .config
 
 When configuring the kernel, make sure the following are enabled as builtins (not as modules):
 * SQUASHFS support (and support for SQUASHFS XZ compressed file systems).
@@ -55,7 +53,7 @@ make -j8
 make modules
 make modules_install
 make headers_install
-kinstall live-kernel 5.4.41
+kinstall 5.4.41 Live-Kernel
 ```
 
 You should have a kernel and initrd located at /boot.
@@ -69,7 +67,9 @@ mksquashfs /some/dir dir.sqsh
 
 ## Troubleshooting ##
 * Issue: Kernel boots, but switchroot fails.
-* Solution: Mount it manually.
+* Solution: Mount it manually. This will require searching to figure out which device 
+            the USB was assigned at boot. Mount it. then mount the squash filesystem
+            over it and call switch_root.
 ```
 mkdir -p /tmp/SR0
 mount /dev/sr0 /tmp/SR0
