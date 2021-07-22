@@ -44,6 +44,7 @@ When configuring the kernel, make sure the following are enabled as builtins (no
 * AUFS or UNIONFS support
 * CDROM support (ISO9660).
 * DEVTMPFS support.
+* OverlayFS support
 * cgroups
 
 ```
