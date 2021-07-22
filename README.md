@@ -72,11 +72,8 @@ mksquashfs /some/dir dir.sqsh
             the USB was assigned at boot. Mount it. then mount the squash filesystem
             over it and call switch_root.
 ```
-mkdir -p /tmp/SR0
-mount /dev/sr0 /tmp/SR0
-if [ -e /tmp/SR0/live/filesystem.squashfs ] ; then
-	mount /tmp/SR0/live/filesystem.squashfs /sysroot
-	switchroot
-fi
+mount /dev/<device> /sysroot
+mount /sysroot/live/filesystem.squash /sysroot
+systemctl --no-block switch-root /sysroot
 ```
 
