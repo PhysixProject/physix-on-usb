@@ -9,12 +9,13 @@
 
 [Unit]
 Description=Switch Root
-DefaultDependencies=no
+#DefaultDependencies=no
 ConditionPathExists=/etc/initrd-release
 OnFailure=emergency.target
 OnFailureJobMode=replace-irreversibly
 AllowIsolate=yes
-Requries=mount-squashfs.service
+Requires=mount-squashfs.service
+After=mount-squashfs.service
 
 [Service]
 Type=oneshot
