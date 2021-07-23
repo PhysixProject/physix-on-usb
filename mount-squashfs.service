@@ -1,0 +1,8 @@
+[Unit]
+Description=Mount /sysroot/live/filesystem.squashfs /sysroot
+
+[Service]
+ExecStart=mount /sysroot/live/filesystem.squashfs /sysroot
+
+[Install]
+WantedBy=multi-user.target
