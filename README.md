@@ -54,6 +54,14 @@ make -j8
 make modules
 make modules_install
 make headers_install
+```
+
+Before creating the initramfs using the next command,
+make sure the initrd-switch-root.serivce and mount-squashfs.service
+files are located in  /lib/systemd/system/. These unit viles are
+responsible for mounting the squashfs filesystem under /sysroot
+during the last stage of boot.
+```
 kinstall 5.4.41 Live-Kernel
 ```
 
