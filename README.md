@@ -77,7 +77,8 @@ We want to add a modified version of the 'initrd-switch-root.serivce' and
 unit files are responsible for mounting the squashfs filesystem under
 /sysroot/live/filesystem.squashfs during the last stage of boot.
 Add the paths of these unit files to be included in the initramfs by
-editing /etc/dracut.conf
+editing /etc/dracut.conf with the following line: 
+'install_items+="/lib/systemd/system/mount-squashfs.service"'
 ```
 kinstall 5.4.41 Live-Kernel
 ```
