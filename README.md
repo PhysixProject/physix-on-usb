@@ -56,6 +56,8 @@ When configuring the kernel, make sure the following are enabled as builtins (no
 * DEVTMPFS support.
 * OverlayFS support
 * cgroups
+If you built the kernel with the kernel config provided in this repo, 
+these options should already be set.
 
 ```
 make menuconfig
