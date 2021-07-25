@@ -1,7 +1,7 @@
 # physix-on-usb
 
 The purpose of this repo is to maintain and document the process
-of building a bootable Physix Project USB
+of building a bootable Physix Project OS on USB
 
 
 ## build-iso.conf ##
@@ -11,9 +11,19 @@ located at root of this repo.
 * If you have not created your SquashFS image, see section below.
 
 
-## Build ISO image ##
-0. Edit build-iso.conf
-1. Run: ./build-iso.sh
+## Build ISO Image Process##
+0. Create SquashFS Image
+1. Comfig/compile kernel
+2. Edit build-iso.conf
+     - Define paths where the kernel, initrd,and filesystem are found.
+3. Run: ./build-iso.sh
+
+
+## Create SquashFS Image ##
+mount /dev/mapper/physix-root /some/dir
+mkdir FSDIR
+copy all files/directories to FSDIR
+mksquashfs FSDIR dir.sqsh
 
 
 ##  Comfig/compile kernel ##
@@ -56,22 +66,20 @@ make modules_install
 make headers_install
 ```
 
-Before creating the initramfs using the next command,
-make sure the initrd-switch-root.serivce and mount-squashfs.service
-files are located in  /lib/systemd/system/. These unit viles are
-responsible for mounting the squashfs filesystem under /sysroot
-during the last stage of boot.
+Before creating the initramfs using the next command, there needs
+to be some edits to how Systemd boots the system. On boot, initramfs
+will mount the root of the ISO image (/dev/disk/by-label/Physix-Project).
+
+We want to add a modified version of the 'initrd-switch-root.serivce' and 
+'mount-squashfs.service' files. Copy them to /lib/systemd/system/. These 
+unit files are responsible for mounting the squashfs filesystem under
+/sysroot/live/filesystem.squashfs during the last stage of boot.
+Add the paths of these unit files to be included in the initramfs by
+editing /etc/dracut.conf
 ```
 kinstall 5.4.41 Live-Kernel
 ```
-
 You should have a kernel and initrd located at /boot.
-
-
-## Create SquashFS Image ##
-
-mnt /dev/mapper/physix-root /some/dir
-mksquashfs /some/dir dir.sqsh
 
 
 ## Troubleshooting ##
@@ -80,7 +88,7 @@ mksquashfs /some/dir dir.sqsh
             the USB was assigned at boot. Mount it. then mount the squash filesystem
             over it and call switch_root.
 ```
-mount /dev/<device> /sysroot
+mount /dev/disk/by-label/Physix-Project /sysroot
 mount /sysroot/live/filesystem.squash /sysroot
 systemctl --no-block switch-root /sysroot
 ```
