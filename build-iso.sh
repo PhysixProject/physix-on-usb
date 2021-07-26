@@ -2,10 +2,11 @@
 
 source ./build-iso.conf
 
+SL_URL='https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.gz'
 SYSLINUX='./syslinux-6.04-pre1/bios'
 
 if [ ! -r ./syslinux-6.04-pre1.tar.gz ] ; then
-	wget https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.gz
+	wget $SL_URL
 	tar xf syslinux-6.04-pre1.tar.gz
 fi
 
