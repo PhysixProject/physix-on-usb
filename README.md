@@ -4,13 +4,6 @@ The purpose of this repo is to maintain and document the process
 of building a bootable Physix Project OS on USB
 
 
-## build-iso.conf ##
-Add paths to the kernel, initrd, and squash filesstem to config file
-located at root of this repo.
-* If you have not built your kernel, see instructions below.
-* If you have not created your SquashFS image, see section below.
-
-
 ## Build ISO Image Process##
 0. Create SquashFS Image
 1. Comfig/compile kernel
@@ -83,6 +76,11 @@ editing /etc/dracut.conf with the following line:
 kinstall 5.4.41 Live-Kernel
 ```
 You should have a kernel and initrd located at /boot.
+
+
+## build-iso.conf ##
+Add paths to the kernel, initrd, and squash filesstem to config file
+located at root of this repo.
 
 
 ## Troubleshooting ##
