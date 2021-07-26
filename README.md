@@ -15,8 +15,8 @@ of building a bootable Physix Project OS on USB
 ## Create SquashFS Image ##
 mount /dev/mapper/physix-root /some/dir
 mkdir FSDIR
-copy all files/directories to FSDIR
-mksquashfs FSDIR dir.sqsh
+copy all files/directories from /some/dir to FSDIR
+mksquashfs FSDIR filesystem.squashfs
 
 
 ##  Comfig/compile kernel ##
