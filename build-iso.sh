@@ -40,7 +40,7 @@ else
 fi
 
 if [ $SQUASH_FS ] ; then
-    cp -v $SQUASH_FS ./physix-project-usb/live
+    cp -v $SQUASH_FS ./physix-project-usb/live/filesystem.squashfs
 else
 	echo "No exported SQUASH_FS"
 	exit 1
