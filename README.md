@@ -1,7 +1,10 @@
 # physix-on-usb
 
+## Why does this exist? ##
 The purpose of this repo is to maintain and document the process
-of building a bootable Physix Project OS on USB
+of building a bootable Physix Project OS on USB. This project 
+specifically is tailored to Physix Project Linux (physixproject.org),
+but these instructions should be general enough to apply to most use cases.
 
 
 ## Build ISO Image Process##
@@ -103,7 +106,7 @@ chroot /tmp/overlay/
 * Issue: Kernel boots, but switchroot fails.
 * Solution: Mount it manually. This will require searching to figure out which device 
             the USB was assigned at boot. Usually it can be found under 
-            /dev/disk/by-label/Physix-Project. Mount it. then mount the squash filesystem
+            /dev/disk/by-label/Physix-Project. Mount it. Then mount the squash filesystem
             over it and call switch_root.
 ```
 mount /dev/disk/by-label/Physix-Project /sysroot
