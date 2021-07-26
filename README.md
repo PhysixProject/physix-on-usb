@@ -102,7 +102,8 @@ chroot /tmp/overlay/
 ## Troubleshooting ##
 * Issue: Kernel boots, but switchroot fails.
 * Solution: Mount it manually. This will require searching to figure out which device 
-            the USB was assigned at boot. Mount it. then mount the squash filesystem
+            the USB was assigned at boot. Usually it can be found under 
+            /dev/disk/by-label/Physix-Project. Mount it. then mount the squash filesystem
             over it and call switch_root.
 ```
 mount /dev/disk/by-label/Physix-Project /sysroot
