@@ -13,11 +13,14 @@ of building a bootable Physix Project OS on USB
 
 
 ## Create SquashFS Image ##
-mount /dev/mapper/physix-root /some/dir
-mkdir FSDIR
-copy all files/directories from /some/dir to FSDIR
-mksquashfs FSDIR filesystem.squashfs
-
+```
+mkdir physix_root
+mount /dev/mapper/physix-root  physix_root
+mount /dev/mapper/physix-home  physix_root/home
+mount /dev/mapper/physix-var   physix_root/var
+mount /dev/mapper/physix-admin physix_root/opt/admin
+mksquashfs physix_root filesystem.squashfs
+```
 
 ##  Comfig/compile kernel ##
 ```
@@ -72,16 +75,29 @@ unit files are responsible for mounting the squashfs filesystem under
 Add the paths of these unit files to be included in the initramfs by
 editing /etc/dracut.conf with the following line: 
 'install_items+="/lib/systemd/system/mount-squashfs.service"'
+
+Run kinstall:
 ```
 kinstall 5.4.41 Live-Kernel
 ```
-You should have a kernel and initrd located at /boot.
+You should have a kernel and an initrd located at /boot.
 
 
 ## build-iso.conf ##
-Add paths to the kernel, initrd, and squash filesstem to config file
+Add paths to the kernel, initrd, and squash filesstem to the build-iso.conf file
 located at root of this repo.
 
+
+## Mount OverlayFS ##
+OverlayFS provides a way to write to the filesystem (in memory).
+Changes are not persistent between reboots.
+```
+mkdir /tmp/upper/
+mkdir /tmp/workdir/
+mkdir /tmp/overlay/
+mount -t overlay -o lowerdir=/,upperdir=/tmp/upper/,workdir=/tmp/workdir/ none /tmp/overlay/
+chroot /tmp/overlay/
+```
 
 ## Troubleshooting ##
 * Issue: Kernel boots, but switchroot fails.
