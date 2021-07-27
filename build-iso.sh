@@ -1,8 +1,13 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2021 Tree Davies
-
 source ./build-iso.conf
+
+`which genisoimage`
+if [ $? -ne 0 ] ; then
+	echo "Error: Failed to find dependency - genisoimage"
+	exit 1
+fi
 
 SL_URL='https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.gz'
 SYSLINUX='./syslinux-6.04-pre1/bios'
