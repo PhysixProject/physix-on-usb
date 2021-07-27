@@ -7,7 +7,7 @@ specifically is tailored to Physix Project Linux (physixproject.org),
 but these instructions should be general enough to apply to most use cases.
 
 
-## Build ISO Image Process##
+## Build ISO Image Process ##
 0. Create SquashFS Image
 1. Comfig/compile kernel
 2. Edit build-iso.conf
@@ -90,6 +90,10 @@ You should have a kernel and an initrd located at /boot.
 Add paths to the kernel, initrd, and squash filesstem to the build-iso.conf file
 located at root of this repo.
 
+## Build the ISO image ##
+After editing build-iso.conf, Run ``` ./build-iso.sh ```
+This will create Physix-Project-Beta.iso which you can write
+to a usb thumb drive using the dd tool.
 
 ## Mount OverlayFS ##
 OverlayFS provides a way to write to the filesystem (in memory).
